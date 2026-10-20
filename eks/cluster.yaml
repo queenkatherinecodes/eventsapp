@@ -1,0 +1,22 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: userX-cluster        # TODO - modify userX to be your user number
+  region: us-east-2
+  version: "1.37"
+autoModeConfig:
+  enabled: false
+
+managedNodeGroups:
+  - name: standard-workers
+    instanceType: t3a.medium
+    desiredCapacity: 2
+
+iam:
+  withOIDC: true
+
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
